@@ -1,0 +1,134 @@
+    Advanced Node.js + Express.js + MongoDB Test Task
+    Project Description
+    Develop a multi-user Task Management System that includes real-time notifications, activity tracking, and role-based access control. The project should evaluate advanced skills in application architecture, complex queries, real-time integration, and performance optimization.
+
+    Requirements
+    1. System Features
+    Core Entities:
+    
+        1.User:
+        email (string, unique, required)
+        password (hashed, required)
+        name (string, required)
+        role (enum: ['admin', 'manager', 'user'])
+        oteam (ObjectId, ref: Team, optional)
+        
+        2.Task:
+        title (string, required)
+        description (string)
+        status (enum: ['open', 'in-progress', 'completed'], default: 'open')
+        assignedTo (ObjectId, ref: User)
+        createdBy (ObjectId, ref: User, required)
+        deadline (date, optional)
+        priority (enum: ['low', 'medium', 'high'], default: 'medium')
+        subtasks (array of objects: { title: string, completed: boolean })
+        
+        3.Team:
+        name (string, required, unique)
+        members (array of ObjectId, ref: User)
+        
+        4.ActivityLog:
+        userId (ObjectId, ref: User, required)
+        taskId (ObjectId, ref: Task, optional)
+        action (string, e.g., 'task created', 'status updated')
+        timestamp (date, default: now)
+
+    2. Features
+    Core Functionalities:
+        1.Authentication & Authorization:
+        Use JWT for authentication.
+        Implement Role-Based Access Control:
+        Admin: Manage users, teams, and tasks globally.
+        Manager: Manage tasks for users within their assigned team.
+        User: Manage tasks assigned to them.
+        2.Task Management:
+        CRUD for tasks:
+        Admin: Manage any task.
+        Manager: Create tasks for team members, view and update team tasks.
+        User: View and update tasks assigned to them.
+        Support for subtasks within tasks.
+        Allow updating task status and priority.
+        3.Team Management:
+        CRUD for teams by Admin.
+        Assign users to teams.
+        4.Real-Time Notifications:
+        Notify assigned users when tasks are created, updated, or completed (if you tru to use web soket then dont do it )
+        5.Activity Log:
+        Log user activities such as task creation, updates, and deletions.
+        Provide an endpoint to fetch logs with filters (e.g., by user, task, or date range).
+
+    3. API Endpoints
+    Authentication
+    POST /register: Create a user account.
+    POST /login: Authenticate user and generate a JWT token.
+    Tasks
+    POST /tasks: Create a new task.
+    GET /tasks: List tasks with filters (e.g., by status, priority, team).
+    GET /tasks/:id: Get task details, including subtasks.
+    PATCH /tasks/:id: Update task details.
+    DELETE /tasks/:id: Delete a task.
+    Teams
+    POST /teams: Create a new team.
+    GET /teams: List all teams.
+    GET /teams/:id: Get team details, including members.
+    PATCH /teams/:id: Update team details.
+    DELETE /teams/:id: Delete a team.
+    Activity Logs
+    GET /activity-logs: Fetch activity logs with filters.
+
+    4. Bonus Features (must inclide this )
+    Implement API caching (e.g., Redis) for frequently fetched data.
+    Pagination and filtering for task lists and logs.
+    Rate-limiting for all API requests.
+    Full-text search for tasks by title and description.
+ 
+  
+
+   
+
+    Evaluation Criteria
+    1.Code Structure:
+    Scalable and modular code.
+    2.Database Design:
+    Efficient MongoDB schema design.
+    3.API Design:
+    RESTful principles with clear documentation.
+    4.Advanced Features:
+    Real-time notifications and scheduling.
+    5.Performance:
+    Efficient queries and optimized API responses.
+    6.Best Practices:
+    Security (e.g., hashed passwords, input validation), error handling, and logging.
+
+packages 
+"axios": "^1.7.8",
+    "bcrypt": "^5.1.1",
+    
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+  
+    
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1"
+    
+    "jsonwebtoken": "^9.0.2",
+  
+    "mongoose": "^8.8.3",
+  
+ 
+    "socket.io": "^4.8.1",
+
+
+
+
+
+
+
+
+
+  "password":"abhishek",
+    "name":"abhi",
+    "role":"admin",
+    "email":"abhi@example.com"
+    
